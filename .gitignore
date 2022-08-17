@@ -1,2 +1,5 @@
 #ignore
 demo/target/
+
+#chromedriver
+# demo/src/test/resources/webdriver/*.exe

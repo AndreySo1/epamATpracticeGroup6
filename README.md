@@ -2,3 +2,4 @@
 - Andrei Saroka
 - Julia Kanash
 - Siarhei Yarmalovich
+- Yuliya Reshetneva
