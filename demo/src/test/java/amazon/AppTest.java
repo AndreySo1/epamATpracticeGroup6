@@ -17,8 +17,6 @@ public class AppTest {
 
       driver.get("https://www.amazon.com/");
 
-
-
       Assert.assertTrue( true );
       driver.close();
       driver.quit();
