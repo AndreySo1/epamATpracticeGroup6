@@ -27,11 +27,6 @@ public class TaskFourTestOne {
             Assert.assertTrue(webElement.isDisplayed());
         }
 
-
-
-
-
-        Assert.assertTrue( true );
         driver.close();
         driver.quit();
     }
