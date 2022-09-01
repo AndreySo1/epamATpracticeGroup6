@@ -1,5 +1,7 @@
 #ignore
 demo/target/
 
+#vscode
+.vscode/
 #chromedriver
 # demo/src/test/resources/webdriver/*.exe
