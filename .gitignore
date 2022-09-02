@@ -3,5 +3,10 @@ demo/target/
 
 #vscode
 .vscode/
+
+#idea
+.idea/
+demo/demo.iml
+
 #chromedriver
 # demo/src/test/resources/webdriver/*.exe
