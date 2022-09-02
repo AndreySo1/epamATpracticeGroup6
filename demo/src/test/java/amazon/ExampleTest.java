@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import amazon.pageobject.pages.exemple.ExampleHomeTitlePage;
 
-public class ExampleTest extends BaseTestV2{
+public class ExampleTest extends BaseTest{
 
 
    @Test
