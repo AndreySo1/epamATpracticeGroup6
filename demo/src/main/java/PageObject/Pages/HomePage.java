@@ -2,6 +2,7 @@ package PageObject.Pages;
 
 import PageObject.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,8 +24,9 @@ public class HomePage extends BasePage {
     By doneButton = By.xpath ("//*[@id=\"a-autoid-3-announce\"]");
     By categoryButton = By.xpath ("//*[@aria-label='Computers & Accessories']");
     By productButton = By.xpath ("//*[contains(text(),'2755e')]");
-
-
+    By locationButton = By.xpath("//*[@id=\"glow-ingress-line2\"]");
+    By polandOnTheList = By.xpath("//*[@id=\"GLUXCountryList_178\"]");
+    By compareLocationButton = By.xpath("//*[@id=\"contextualIngressPtLabel_deliveryShortLine\"]/span[2]");
 
     public HomePage (WebDriver driver) {
         super(driver);
@@ -49,26 +51,39 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage selectAmericanCity() {
+    public String selectAmericanCity() {
 
         driver.findElement(enterButton).sendKeys("99801");
         driver.findElement(applyButton).click();
         driver.findElement(continueButton).click();
-        return this;
+        String result1 = driver.findElement(locationButton).getText();
+        return result1;
     }
 
-    public HomePage checkCountryOnTheList() {
+    public String checkPolandOnTheList() {
+        driver.findElement(dropDownMenuButton).click();
+        driver.findElement(radioButton).click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", polandOnTheList);
+        Thread.sleep(500);
+
+        String result2 = driver.findElement(polandOnTheList).getText();
+
+        return result2;
+    }
+
+    public HomePage checkAustraliaOnTheList() {
         driver.findElement(dropDownMenuButton).click();
         driver.findElement(radioButton).click();
         return this;
     }
 
-    public HomePage verifyLocationsAreTheSame() {
+    public String verifyLocationsAreTheSame() {
         driver.findElement(australiaOnTheList).click();
         driver.findElement(doneButton).click();
         driver.findElement(categoryButton).click();
         driver.findElement(productButton).click();
-        return this;
+        String result3 = driver.findElement(compareLocationButton).getText();
+        return result3;
     }
 
 }
