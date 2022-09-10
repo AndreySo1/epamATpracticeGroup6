@@ -8,12 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AmazonSearchFilterPriceHomePage extends BasePage {
 
     public static final String LEGO = "LEGO";
-    private static final String SPAN_CLASS_A_PRICE_WHOLE = "//span[@class='a-price-whole']";
-    private static final String URL_FOR_FILTER = "https://www.amazon.com/s?" +
+
+    public static final int MIN = 5;
+    public static final int MAX = 6;
+    public static final String SPAN_CLASS_A_PRICE_WHOLE = "//span[@class='a-price-whole']";
+    public static final String URL_FOR_FILTER = "https://www.amazon.com/s?" +
             "k=school+supplies" +
             "&crid=3B2SMJ2SQ64N" +
             "&pd_rd_r=002c7e59-b3e2-4870-9de7-a9c54fb9263c" +
@@ -48,5 +53,41 @@ public class AmazonSearchFilterPriceHomePage extends BasePage {
         List<WebElement> webElements = webDriver.findElements(By.xpath("//span[contains(text(),'LEGO')]"));
 
         return webElements;
+    }
+
+    public Set<String> getFilterByPrice() {
+        WebElement lowPrice = webDriver.findElement(By.id("low-price"));
+        lowPrice.sendKeys(String.valueOf(MIN));
+
+        WebElement maxPrice = webDriver.findElement(By.id("high-price"));
+        maxPrice.sendKeys(String.valueOf(MAX), Keys.ENTER);
+
+        Set<String> prices = filteredByPrice.stream()
+                .map(e -> e.getText())
+                .collect(Collectors.toSet());
+
+        return prices;
+    }
+
+    public List<String> getFilterByPriceAndSort() {
+
+        WebElement lowPrice = webDriver.findElement(By.id("low-price"));
+        lowPrice.sendKeys(String.valueOf(MIN));
+
+        WebElement maxPrice = webDriver.findElement(By.id("high-price"));
+        maxPrice.sendKeys(String.valueOf(MAX), Keys.ENTER);
+
+        //click link Sort By:
+        sortBy.click();
+
+        //select sort from Low to High
+        sortAsc.click();
+
+        //get list prices (String) from the list of all items to buy
+        List<String> pricesStr = filteredByPriceSorted.stream()
+                .map(e -> e.getText())
+                .collect(Collectors.toList());
+
+        return pricesStr;
     }
 }
